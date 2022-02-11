@@ -33,11 +33,9 @@ const Header = (title, date, temp) => {
   //    <span class="temp">{ temp }</span>
   //  </div>
   //
-const headerAppender = (headerObj) => {
-  const date = 'February 10, 2022';
-  const title = 'Lamba Times';
-  const temp = '50°'
-  document.querySelector('.header-container').appendChild(Header(title, date, temp));
+const headerAppender = (selector) => {
+  const header = document.querySelector(selector)
+  header.appendChild(Header('Lamba Times', 'February 11, 2022', '50°'));
 }
 // TASK 2
   // ---------------------
