@@ -34,8 +34,8 @@ const Header = (title, date, temp) => {
   //  </div>
   //
 const headerAppender = (selector) => {
-  const header = document.querySelector(selector)
-  header.appendChild(Header('Lamba Times', 'February 11, 2022', '50°'));
+  const headerElem = document.querySelector(selector)
+  headerElem.appendChild(Header('Lamba Times', 'February 11, 2022', '50°'));
 }
 // TASK 2
   // ---------------------
