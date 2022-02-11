@@ -1,5 +1,35 @@
+import axios from "axios";
+
 const Card = (article) => {
-  // TASK 5
+   const cardWrapper = document.createElement("div");
+  const cardHeadline = document.createElement("div");
+  const cardAuthor = document.createElement("div");
+  const cardImg = document.createElement("div");
+  const image = document.createElement("img");
+  const cardName = document.createElement("span");
+
+  cardWrapper.appendChild(cardHeadline);
+  cardWrapper.appendChild(cardAuthor);
+  cardAuthor.appendChild(cardImg);
+  cardImg.appendChild(image);
+  cardAuthor.appendChild(cardName);
+
+  cardWrapper.classList.add("card");
+  cardHeadline.classList.add("headline");
+  cardAuthor.classList.add("author");
+  cardImg.classList.add("img-container");
+
+  image.src = article.authorPhoto;
+  cardHeadline.textContent = article.headline;
+  cardName.textContent = `By ${article.authorName}`;
+
+  cardWrapper.addEventListener("click", () => {
+    console.log(article.headline);
+  });
+
+  return cardWrapper;
+};
+ // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
   // It takes as its only argument an "article" object with `headline`, `authorPhoto` and `authorName` properties.
@@ -17,9 +47,23 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
-}
-
 const cardAppender = (selector) => {
+  axios.get("http://localhost:5000/api/articles")
+    .then((resp) => {
+      const cardElement = document.querySelector(selector);
+      Object.values(resp.data.articles).forEach((articleArray) => {
+        articleArray.forEach((articleObj) => {
+          cardElement.appendChild(Card(articleObj));
+        });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      console.log("DONE");
+    });
+};
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -28,6 +72,4 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
-}
-
-export { Card, cardAppender }
+export { Card, cardAppender };
