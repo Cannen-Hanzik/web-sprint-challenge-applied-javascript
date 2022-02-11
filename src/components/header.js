@@ -37,7 +37,7 @@ const headerAppender = (headerObj) => {
   const date = 'February 10, 2022';
   const title = 'Lamba Times';
   const temp = '50°'
-  document.body.appendChild(Header(title, date, temp));
+  document.querySelector('.header-container').appendChild(Header(title, date, temp));
 }
 // TASK 2
   // ---------------------
